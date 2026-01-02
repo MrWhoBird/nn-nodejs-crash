@@ -1,14 +1,19 @@
 import express from 'express';
+import dotenv from "dotenv";
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import Blog from './models/blog.model.js'
 
+dotenv.config({
+    path: './.env'
+});
+
 // express app
 const app = express();
 
-const dbURI = "mongodb+srv://vscode:Empik123@clusterone.tqudk4o.mongodb.net/?appName=ClusterOne";
+const dbURI = process.env.MONGODB_URI;
 mongoose.connect(dbURI)
-    .then(res => console.log("Connected to the database"), app.listen(3000))
+    .then(res => console.log("Connected to the database", dbURI), app.listen(3000))
     .catch(err => console.log(err));
 
 
@@ -25,6 +30,7 @@ app.use((req, res, next) => {
     console.log('method: ', req.method);
     next();
 });
+app.use(express.urlencoded({extended:true}))
 app.use((req, res, next) => {
     console.log('in the next middleware');
     next();
@@ -73,18 +79,18 @@ app.get('/single-blog', (req, res) => {
         });
 });
 
-// app.get('/', (req, res) => {
-//     const blogs = [
-//         { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-//         { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-//         { title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur' },
-//     ];
-//     res.render('index', { title: 'Home', blogs });
-// });
-
 app.get('/', (req, res) => {
-    res.redirect('/blogs');
+    const blogs = [
+        { title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur' },
+        { title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur' },
+        { title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur' },
+    ];
+    res.render('index', { title: 'Home', blogs });
 });
+
+// app.get('/', (req, res) => {
+//     res.redirect('/blogs');
+// });
 
 app.get('/about', (req, res) => {
     res.render('about', { title: 'About' });
@@ -104,6 +110,21 @@ app.get('/blogs', (req, res) => {
             console.log(err);
         });
 });
+
+app.post('/blogs', (req, res) => {
+    //console.log(req.body,res.body)
+    const blog = new Blog(req.body);
+
+    blog.save()
+        .then(result => {
+            //the res from beggining of ap.post
+            // /home vs /blogs
+            res.redirect('/blogs')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
 
 // 404 page
 app.use((req, res) => {
