@@ -1,14 +1,15 @@
 import express from 'express';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// import mongoose from 'mongoose';
+import connectDB from './server/config/db_connection.js';
 import ejsLayouts from 'express-ejs-layouts';
 
 //import Blog from './models/blog.model.js'
 import blogRouter from './routes/blogRoutes.js';
 
-dotenv.config({
-    path: './.env'
-});
+// dotenv.config({
+//     path: './.env'
+// });
 
 // express app & db connection
 const app = express();
@@ -19,13 +20,15 @@ app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`)
 });
 
-mongoose.connect(dbURI)
-    .then(() => console.log(`Connected to the database ${dbURI}`))
-    .catch(err => console.log(err));
+// mongoose.connect(dbURI)
+//     .then(() => console.log(`Connected to the database ${dbURI}`))
+//     .catch(err => console.log(err));
+
+connectDB();
 
 // register view engine
-//app.use(ejsLayouts);
-app.set('layout', '../layouts/main');
+app.use(ejsLayouts);
+app.set('layout', '../views/layouts/main.ejs');
 app.set('view engine', 'ejs');
 
 // middleware & static files
@@ -43,6 +46,9 @@ app.use((req, res, next) => {
     next();
 });
 
+// new tutorial routes
+app.use('/new', blogRouter)
+
 // mongoose & mongo test routes
 app.use('/test', blogRouter)
 
@@ -53,7 +59,7 @@ app.get('/', (req, res) => {
 
 // about page
 app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
+    res.render('about', { title: 'About XXXX' });
 });
 
 // blog routes

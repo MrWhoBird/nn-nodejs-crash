@@ -1,8 +1,7 @@
+<!-- <!DOCTYPE html>
 <html lang="en">
-<%- include("./partials/head.ejs") %>
-
 <body>
-  <%- include("./partials/nav.ejs") %>
+  this is from index file
 
   <div class="blogs content">
     <h2>All Blogs</h2>
@@ -19,7 +18,36 @@
     <% } %>
     
   </div>
-
-  <%- include("./partials/footer.ejs") %>
 </body>
-</html>
+</html> -->
+
+<div class="author">
+  <h1 class="author__heading">Hi, I am Raddy.</h1>
+  <p class="author__body">Web developer and content creator.</p>
+</div>
+
+<img src="/img/hero-image.webp" alt="person looking out through window" class="hero-image" width="981" height="528">
+
+<section class="articles">
+  this is from index file
+  <h2 class="articles__heading">Latest Posts</h2>
+
+  <ul class="article-ul">
+    <% blogs.forEach(blog => { %>
+      <li>
+        <a href="/post/<%= blog._id %>">
+          <span><%= blog.title %></span>
+          <span class="article-list__date"><%= blog.createdAt.toDateString() %></span>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+
+
+ 
+
+  
+
+
+
+</section>

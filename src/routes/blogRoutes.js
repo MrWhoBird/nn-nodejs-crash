@@ -3,6 +3,9 @@ import blogController from '../controllers/controllers.js'
 
 const router = express.Router();
 
+//new tutorial routes
+router.get('/hom', blogController.new_home);
+router.get('/abut', blogController.new_abut);
 //must be first before :id??
 // test routes
 router.get('/add-blog', blogController.test_blog_create);

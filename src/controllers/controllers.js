@@ -1,5 +1,15 @@
 import Blog from '../models/blog.model.js';
 
+//new tutorial controllers
+const new_home = (req,res) => {
+    res.render('create.ejs', { title: 'hom' })
+};
+
+const new_abut = (req,res) => {
+    res.render('abut.ejs', { title: 'abut' })
+}
+
+//nn controllers
 const blog_index = (req, res) => {
   Blog.find().sort({ createdAt: -1 })
     .then(result => {
@@ -9,6 +19,21 @@ const blog_index = (req, res) => {
       console.log(err);
     });
 }
+
+// router.get('', async (req, res) => {
+//   const locals = {
+//     title: "NodeJs Blog",
+//     description: "Simple Blog created with NodeJs, Express & MongoDb."
+//   }
+
+//   try {
+//     const data = await Post.find();
+//     res.render('index', { locals, data });
+//   } catch (error) {
+//     console.log(error);
+//   }
+
+// });
 
 const blog_details = (req, res) => {
   const id = req.params.id;
@@ -103,5 +128,7 @@ export default {
   test_blog_create,
   test_display_all_blogs,
   test_single_blog,
-  test_predefined
+  test_predefined,
+  new_home,
+  new_abut
 }

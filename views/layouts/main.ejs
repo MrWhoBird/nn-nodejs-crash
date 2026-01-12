@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="/css/styles.css">
+
+<body>
+    <%- include("../partials/search.ejs") %>
+        <div class="container">
+            <%- include("../partials/head.ejs") %>
+                this is from main file
+                <main class="main">
+                    <%- body%>
+                </main>
+                <%- include("../partials/footer.ejs") %>
+        </div>
+</body>
+
+</html>
