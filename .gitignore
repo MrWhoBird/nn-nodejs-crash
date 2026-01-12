@@ -1,3 +1,4 @@
 node_modules/
 leftovers/
 .env
+.DS_Store
