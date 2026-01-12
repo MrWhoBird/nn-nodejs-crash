@@ -1,26 +1,14 @@
 import express from 'express';
-import blogController from '../controllers/controllers.js'
+import blogController from '../controllers/blogController.js'
 
-const router = express.Router();
+const blogRouter = express.Router();
 
-//new tutorial routes
-router.get('/hom', blogController.new_home);
-router.get('/abut', blogController.new_abut);
-//must be first before :id??
-// test routes
-router.get('/add-blog', blogController.test_blog_create);
-router.get('/all-blogs', blogController.test_display_all_blogs);
-router.get('/single-blog', blogController.test_single_blog);
-router.get('/predefined', blogController.test_predefined);
+// blog routes
+blogRouter.get('/about', blogController.blog_about);
+blogRouter.get('/create', blogController.blog_create_get);
+blogRouter.get('/', blogController.blog_index);
+blogRouter.post('/', blogController.blog_create_post)
+blogRouter.get('/:id', blogController.blog_details);
+blogRouter.delete('/:id', blogController.blog_delete);
 
-// standard routes
-router.get('/create', blogController.blog_create_get);
-router.get('/', blogController.blog_index);
-router.post('/', blogController.blog_create_post)
-router.get('/:id', blogController.blog_details);
-router.delete('/:id', blogController.blog_delete);
-
-
-
-
-export default router;
+export default blogRouter;

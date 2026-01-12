@@ -1,0 +1,34 @@
+<div class="author">
+  <h1 class="author__heading">Blog website</h1>
+  <p class="author__body">Hubert • NodeJs & MongoDB sandbox</p>
+</div>
+
+<img src="/img/hero-image.webp" alt="person looking out through window" class="hero-image" width="981" height="528">
+
+<section class="articles">
+  this is from index file
+  <h2 class="articles__heading">Latest Posts</h2>
+
+  <ul class="article-ul">
+    <% if (blogs.length> 0) { %>
+      <% blogs.forEach(blog=> { %>
+        <li>
+          <a href="/blogs/<%= blog._id %>">
+            <span>
+              <%= blog.title %>
+            </span>
+            <span>
+              <%= blog.snippet %>
+            </span>
+            <span class="article-list__date">
+              <%= blog.createdAt.toDateString() %>
+            </span>
+          </a>
+        </li>
+      <% }) %>
+    <% } else { %>
+      <p>There are no blogs to display...</p>
+    <% } %>
+  </ul>
+
+</section>
