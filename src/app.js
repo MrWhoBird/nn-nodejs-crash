@@ -1,7 +1,7 @@
 import express from 'express';
 import connectDB from './server/config/db_connection.js';
 import ejsLayouts from 'express-ejs-layouts';
-import testRouter from './routes/testRoutes.js';
+import devRouter from './routes/devRoutes.js';
 import blogRouter from './routes/blogRoutes.js';
 
 // express app listen
@@ -36,13 +36,14 @@ app.use((req, res, next) => {
 });
 
 // ROUTES
-// move to routes?
+
+// redirection
 app.get('/', (req, res) => {
     res.redirect('/blogs');
 });
 
 // dev routes
-app.use('/dev', testRouter)
+app.use('/dev', devRouter)
 
 // blog routes
 app.use('/blogs', blogRouter)

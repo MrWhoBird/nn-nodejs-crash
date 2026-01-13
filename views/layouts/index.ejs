@@ -10,8 +10,8 @@
   <h2 class="articles__heading">Latest Posts</h2>
 
   <ul class="article-ul">
-    <% if (blogs.length> 0) { %>
-      <% blogs.forEach(blog=> { %>
+    <% if (data.length> 0) { %>
+      <% data.forEach(blog => { %>
         <li>
           <a href="/blogs/<%= blog._id %>">
             <span>
@@ -30,5 +30,9 @@
       <p>There are no blogs to display...</p>
     <% } %>
   </ul>
+
+  <% if (nextPage !== null) { %>
+    <a href="?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+  <% } %>
 
 </section>
